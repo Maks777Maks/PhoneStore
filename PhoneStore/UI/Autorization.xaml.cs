@@ -20,6 +20,7 @@ namespace UI
     /// </summary>
     public partial class Autorization : Window
     {
+        UserUI user;
         public Autorization()
         {
             InitializeComponent();
@@ -29,10 +30,16 @@ namespace UI
         {
             if (UserName.Text != "" && UserMail.Text != "")
             {
-                UserUI user = new UserUI { Name = UserName.Text, Mail = UserMail.Text };
-                MainWindow mw = new MainWindow();
-                mw.ShowDialog();
-                this.Close();
+                user = new UserUI { Name = UserName.Text, Mail = UserMail.Text};
+                if (user != null)
+                {
+                    MainWindow mw = new MainWindow(user);
+                    this.Close();
+                    mw._User = user;
+                    mw.ShowDialog();
+                   
+                }
+
             }
         }
     }
