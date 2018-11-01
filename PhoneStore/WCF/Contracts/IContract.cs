@@ -19,5 +19,8 @@ namespace WCF.Contracts
 
         [OperationContract]
         void CreateOrder(OrderDTO order);
+
+        [OperationContract]
+        void AddUser(UserDTO user);
     }
 }

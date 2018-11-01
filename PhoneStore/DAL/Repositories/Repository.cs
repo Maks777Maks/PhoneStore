@@ -20,7 +20,7 @@ namespace DAL.Repositories
         }
 
         public void Create(T entity)
-        {
+        {           
             _set.Add(entity);
             _context.SaveChanges();
         }

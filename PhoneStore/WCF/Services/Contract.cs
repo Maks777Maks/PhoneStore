@@ -13,6 +13,13 @@ namespace WCF.Services
 {
     public class Contract : IContract
     {
+        public void AddUser(UserDTO user)
+        {
+            Repository<User> repository = new Repository<User>(new DAL.Context());
+            User p = Mapper.UserFromDTO(user);
+            repository.Create(p);
+        }
+
         public void AddPhone(PhoneDTO phone)
         {
             Repository<Phone> repository = new Repository<Phone>(new DAL.Context());
