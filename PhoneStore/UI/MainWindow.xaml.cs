@@ -35,8 +35,8 @@ namespace UI
             phones.Add(new PhoneUI { Mark = "Huawey", Model = "P Smart+", Price = 9800 });
             ListView.ItemsSource = phones;
             _User = user;
-            UserName.Text = _User.Name;
-            UserMail.Text = _User.Mail;
+            UserName.Text ="Name: "+_User.Name;
+            UserMail.Text = "Mail: "+ _User.Mail;
 
         }
 

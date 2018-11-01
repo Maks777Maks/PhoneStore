@@ -42,8 +42,8 @@ namespace UI
             if (MessageBox.Show("Confirm this order", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 order = new OrderUI { Phone = phone, dateTime = DateTime.Now,User=user};
+                this.Close();
                 
-
             }
             else
                 this.Close();

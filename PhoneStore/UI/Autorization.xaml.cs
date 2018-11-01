@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,8 @@ namespace UI
     public partial class Autorization : Window
     {
         UserUI user;
+
+        string pattern = @"[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
         public Autorization()
         {
             InitializeComponent();
@@ -28,7 +31,7 @@ namespace UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (UserName.Text != "" && UserMail.Text != "")
+            if (UserName.Text != "" && UserMail.Text != ""&& Regex.IsMatch(UserMail.Text, pattern))
             {
                 user = new UserUI { Name = UserName.Text, Mail = UserMail.Text};
                 if (user != null)
@@ -40,6 +43,11 @@ namespace UI
                    
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("No correct Mail!!!");
+                return;
             }
         }
     }
