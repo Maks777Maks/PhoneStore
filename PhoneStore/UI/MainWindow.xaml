@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="{Binding ID}" Height="450" Width="800">
+        
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.2*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView Grid.Row="1" Name="ListView" Grid.ColumnSpan="2" MouseDoubleClick="ListView_MouseDoubleClick">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Left"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <StackPanel Margin="5" Background="Aqua" Height="350" Width="275">
+                        <TextBlock Text="{Binding Mark}" HorizontalAlignment="Center" FontSize="18"/>
+                        <TextBlock Text="{Binding Model}" HorizontalAlignment="Center" FontSize="18"/>
+                        <TextBlock Text="{Binding Price}" HorizontalAlignment="Center" FontSize="18"/>
+                    </StackPanel>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        
+        
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" Name="UserName" FontSize="15"/>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Name="UserMail" FontSize="15"/>
         
     </Grid>
 </Window>
