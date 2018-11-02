@@ -24,42 +24,53 @@ namespace UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public UserUI _User;
+        public UserUI _User { get; set; }
         ObservableCollection<PhoneUI> phones = new ObservableCollection<PhoneUI>();
         PhoneUI selectedphone;
         ServiceReference2.ContractClient client = new ContractClient();
-
+        bool flag = false;
 
 
         public MainWindow(UserUI user)
         {
+           
+            
             InitializeComponent();
-                     
+            _User = new UserUI();
+            _User.ID = 10;
+
             foreach (var item in client.GetPhones())
             {
                 var p = new PhoneUI { ID = item.ID, Mark = item.Mark, Model = item.Model, Price = item.Price };
                 phones.Add(p);
             }
-            _User = new UserUI();
             ListView.ItemsSource = phones;
-            bool flag = false;
+
+
+
+
             foreach (var i in client.GetUsers())
             {
-                if(i.Name==user.Name&&i.Mail== user.Mail)
+
+                if (i.Name == user.Name && i.Mail == user.Mail)
                 {
-                    
+
                     _User = Mapper.UserFromDTO(i);
                     flag = true;
-                    return;
+
+                    break;
                 }
             }
             if (flag == false)
             {
+
                 _User = user;
                 client.AddUser(Mapper.UserFromUI(_User));
             }
+
             UserName.Text = _User.Name;
             UserMail.Text = _User.Mail;
+            this.DataContext = _User;
 
         }
 
@@ -75,8 +86,9 @@ namespace UI
 
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+           
             selectedphone = (ListView.SelectedItems[0] as PhoneUI);
-            Order o = new Order(selectedphone,_User);
+            Order o = new Order(selectedphone, _User);
             o.ShowDialog();
 
         }

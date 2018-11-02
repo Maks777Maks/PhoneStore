@@ -44,7 +44,7 @@ namespace WCF.Services
             o.user = userrep.GetById(o.user.ID);
             if (o.user == null)
             {
-                throw new Exception("User = null");
+                throw new Exception($"User = null {o.user.ID}   {o.user.Name}   {o.user.Mail} ");
             }
 
             Repository<Phone> phonerep = new Repository<Phone>(context);

@@ -35,7 +35,7 @@ namespace UI
                 {
                     MainWindow mw = new MainWindow(user);
                     this.Close();
-                    mw._User = user;
+                    //mw._User = user;
                     mw.ShowDialog();
                    
                 }
