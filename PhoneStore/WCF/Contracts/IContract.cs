@@ -15,6 +15,9 @@ namespace WCF.Contracts
         List<PhoneDTO> GetPhones();
 
         [OperationContract]
+        List<UserDTO> GetUsers();
+
+        [OperationContract]
         void AddPhone(PhoneDTO phone);
 
         [OperationContract]

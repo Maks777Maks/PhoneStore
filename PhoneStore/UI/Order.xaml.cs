@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UI.Classes;
+using UI.ServiceReference2;
+using UI.Util;
+using WCF.DTOModels;
 
 namespace UI
 {
@@ -21,6 +24,8 @@ namespace UI
     /// </summary>
     public partial class Order : Window
     {
+        ServiceReference2.ContractClient orderclient = new ContractClient();
+
         public PhoneUI phone;
        
         OrderUI order;
@@ -42,8 +47,8 @@ namespace UI
             if (MessageBox.Show("Confirm this order", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 order = new OrderUI { Phone = phone, dateTime = DateTime.Now,User=user};
-                
-
+                OrderDTO ord= Mapper.OrderFromUI(order);
+                orderclient.CreateOrder(ord);
             }
             else
                 this.Close();

@@ -10,12 +10,13 @@ namespace UI.Util
 {
     public static class Mapper
     {
-        public static PhoneDTO PhoneFromUI(PhoneUI phonedto)
+        public static PhoneDTO PhoneFromUI(PhoneUI phoneui)
         {
             PhoneDTO result = new PhoneDTO();
-            result.Mark = phonedto.Mark;
-            result.Model = phonedto.Model;
-            result.Price = phonedto.Price;
+            result.Mark = phoneui.Mark;
+            result.Model = phoneui.Model;
+            result.Price = phoneui.Price;
+            result.ID = phoneui.ID;
             return result;
         }
 
@@ -26,16 +27,17 @@ namespace UI.Util
             result.Mark = phonedto.Mark;
             result.Model = phonedto.Model;
             result.Price = phonedto.Price;
+            result.ID = phonedto.ID;
             return result;
         }
 
 
-        public static OrderDTO OrderFromUI(OrderUI orderdto)
+        public static OrderDTO OrderFromUI(OrderUI orderui)
         {
             OrderDTO result = new OrderDTO();
-            result.phone = PhoneFromUI(orderdto.Phone);
-            result.user = UserFromUI(orderdto.User);
-            result.time = orderdto.dateTime;
+            result.phone = PhoneFromUI(orderui.Phone);
+            result.user = UserFromUI(orderui.User);
+            result.time = orderui.dateTime;
             return result;
         }
 
@@ -49,21 +51,24 @@ namespace UI.Util
             return result;
         }
 
-        public static UserDTO UserFromUI(UserUI orderdto)
+        public static UserDTO UserFromUI(UserUI userui)
         {
             UserDTO result = new UserDTO();
-            result.Name = orderdto.Name;
-            result.Mail = orderdto.Mail;
+            result.Name = userui.Name;
+            result.Mail = userui.Mail;
+            result.ID = userui.ID;
             return result;
         }
 
 
-        public static UserUI UserFromDTO(UserDTO orderdto)
+        public static UserUI UserFromDTO(UserDTO userdto)
         {
             UserUI result = new UserUI();
-            result.Name = orderdto.Name;
-            result.Mail = orderdto.Mail;
+            result.Name = userdto.Name;
+            result.Mail = userdto.Mail;
+            result.ID = userdto.ID;
             return result;
         }
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UI.Classes;
+using UI.ServiceReference2;
+using UI.Util;
 
 namespace UI
 {
@@ -22,19 +25,39 @@ namespace UI
     public partial class MainWindow : Window
     {
         public UserUI _User;
-        List<PhoneUI> phones = new List<PhoneUI>();
+        ObservableCollection<PhoneUI> phones = new ObservableCollection<PhoneUI>();
         PhoneUI selectedphone;
+        ServiceReference2.ContractClient client = new ContractClient();
+
 
 
         public MainWindow(UserUI user)
         {
             InitializeComponent();
-            
-            phones.Add(new PhoneUI { Mark = "Xiaomy", Model = "Redmi Note 5", Price = 5800 });
-            phones.Add(new PhoneUI { Mark = "Samsung", Model = "J7", Price = 3800 });
-            phones.Add(new PhoneUI { Mark = "Huawey", Model = "P Smart+", Price = 9800 });
+                     
+            foreach (var item in client.GetPhones())
+            {
+                var p = new PhoneUI { ID = item.ID, Mark = item.Mark, Model = item.Model, Price = item.Price };
+                phones.Add(p);
+            }
+            _User = new UserUI();
             ListView.ItemsSource = phones;
-            _User = user;
+            bool flag = false;
+            foreach (var i in client.GetUsers())
+            {
+                if(i.Name==user.Name&&i.Mail== user.Mail)
+                {
+                    
+                    _User = Mapper.UserFromDTO(i);
+                    flag = true;
+                    return;
+                }
+            }
+            if (flag == false)
+            {
+                _User = user;
+                client.AddUser(Mapper.UserFromUI(_User));
+            }
             UserName.Text = _User.Name;
             UserMail.Text = _User.Mail;
 
@@ -55,6 +78,7 @@ namespace UI
             selectedphone = (ListView.SelectedItems[0] as PhoneUI);
             Order o = new Order(selectedphone,_User);
             o.ShowDialog();
+
         }
     }
 }

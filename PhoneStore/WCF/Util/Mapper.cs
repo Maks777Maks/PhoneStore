@@ -13,6 +13,7 @@ namespace WCF.Util
         public static Phone PhoneFromDTO(PhoneDTO phonedto )
         {
             Phone result = new Phone();
+            result.ID = phonedto.ID;
             result.Mark = phonedto.Mark;
             result.Model = phonedto.Model;
             result.Price = phonedto.Price;
@@ -21,6 +22,7 @@ namespace WCF.Util
         public static Order OrderFromDTO(OrderDTO orderdto)
         {
             Order result = new Order();
+
             result.phone = PhoneFromDTO(orderdto.phone);
             result.user = UserFromDTO(orderdto.user);
             result.time = orderdto.time;
@@ -30,7 +32,8 @@ namespace WCF.Util
         {
             User result = new User();
             result.Name = orderdto.Name;
-            result.Mail = orderdto.Mail;           
+            result.Mail = orderdto.Mail;
+            result.ID = orderdto.ID;         
             return result;
         }
     }

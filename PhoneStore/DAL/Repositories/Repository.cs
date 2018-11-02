@@ -1,4 +1,5 @@
 ﻿using DAL.Interfaces;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,12 +13,19 @@ namespace DAL.Repositories
     {
         private readonly DbContext _context;
         private readonly DbSet<T> _set;
+        //private readonly DbSet<Order> _order;
 
         public Repository(DbContext db)
         {
             _context = db;
             _set = db.Set<T>();
         }
+
+        //public void AddOrder(Order order)
+        //{
+        //   // _order.Attach(order.phone);
+            
+        //}
 
         public void Create(T entity)
         {           
